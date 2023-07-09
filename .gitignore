@@ -1,0 +1,10 @@
+# package directories
+node_modules
+jspm_packages
+.env
+handler.js
+serverless.yml
+package-lock.json
+
+# Serverless directories
+.serverless
