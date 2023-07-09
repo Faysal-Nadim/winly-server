@@ -14,6 +14,7 @@ const productRoute = require("./Routes/product");
 const cartRoute = require("./Routes/cart");
 const orderRoute = require("./Routes/order");
 const ticketRoute = require("./Routes/ticket");
+const stripeRoute = require("./Routes/stripe");
 
 //Database Config
 mongoose
@@ -36,6 +37,7 @@ app.use("/api/v1", productRoute);
 app.use("/api/v1", cartRoute);
 app.use("/api/v1", orderRoute);
 app.use("/api/v1", ticketRoute);
+app.use("/api/v1", stripeRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Sever Running On PORT ${process.env.PORT}`);

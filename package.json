@@ -28,7 +28,8 @@
     "node-ses": "^3.0.3",
     "nodemailer": "^6.9.3",
     "serverless-http": "^3.2.0",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "stripe": "^12.12.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

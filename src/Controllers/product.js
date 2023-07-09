@@ -22,7 +22,9 @@ exports.createProduct = (req, res) => {
   });
   _product.save((error, product) => {
     if (error) {
-      return res.status(400).json({ msg: "Something Went Wrong" });
+      return res
+        .status(400)
+        .json({ msg: "Something Went Wrong", error: error });
     }
     if (product) {
       return res.status(201).json({ msg: "New Product Added!", product });
