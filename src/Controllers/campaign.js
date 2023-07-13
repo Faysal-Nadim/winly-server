@@ -55,6 +55,19 @@ exports.getCampaign = (req, res) => {
     });
 };
 
+exports.getAllCampaign = (req, res) => {
+  Campaign.find()
+    .populate({ path: "product" })
+    .exec((error, campaigns) => {
+      if (error) {
+        return res.status(400).json({ msg: "Something Went Wrong" });
+      }
+      if (campaigns) {
+        return res.status(400).json({ campaigns });
+      }
+    });
+};
+
 exports.getProductByCampaign = (req, res) => {
   Product.find({ campaign: req.body.campaign }).exec((error, products) => {
     if (error) {

@@ -7,6 +7,7 @@ const {
   deleteCampaign,
   updateStatus,
   updateDisplayStatus,
+  getAllCampaign,
 } = require("../Controllers/campaign");
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router.post("/campaign/update/status", updateStatus);
 router.post("/campaign/update/display-status", updateDisplayStatus);
 router.post("/campaign/delete", deleteCampaign);
 router.post("/campaign/product/get", getProductByCampaign);
+router.get("/campaign/get/all", getAllCampaign);
 router.get("/campaign/get", getCampaign);
 
 module.exports = router;
