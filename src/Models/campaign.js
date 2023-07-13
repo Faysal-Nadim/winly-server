@@ -41,7 +41,7 @@ const campaignSchema = new mongoose.Schema(
     },
     displayStatus: {
       type: String,
-      enum: ["Featured", "Selling Fast"],
+      enum: ["Hero", "Selling Fast", "Upcoming", "Explore"],
       default: null,
     },
     product: {

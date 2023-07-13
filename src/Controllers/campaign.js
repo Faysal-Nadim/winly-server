@@ -2,7 +2,7 @@ const Campaign = require("../Models/campaign");
 const Product = require("../Models/product");
 
 exports.createCampaign = (req, res) => {
-  const { title, validity, draw_date, status, products, displayStatus, img } =
+  const { title, validity, draw_date, status, product, displayStatus, img } =
     req.body;
   const D = new Date(validity);
   const _campaign = new Campaign({
@@ -11,7 +11,7 @@ exports.createCampaign = (req, res) => {
     img,
     draw_date,
     status,
-    products,
+    product,
     displayStatus,
   });
 
@@ -33,7 +33,16 @@ exports.getCampaign = (req, res) => {
         return res.status(400).json({ msg: "Something Went Wrong" });
       }
       if (campaigns) {
-        return res.status(200).json({ campaigns });
+        return res.status(200).json({
+          campaigns: {
+            hero: campaigns.filter((c) => c.displayStatus === "Hero"),
+            sellingFast: campaigns.filter(
+              (c) => c.displayStatus === "Selling Fast"
+            ),
+            upcoming: campaigns.filter((c) => c.displayStatus === "Upcoming"),
+            explore: campaigns.filter((c) => c.displayStatus === "Explore"),
+          },
+        });
       }
     });
 };
