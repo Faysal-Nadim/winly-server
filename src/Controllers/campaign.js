@@ -63,7 +63,7 @@ exports.getAllCampaign = (req, res) => {
         return res.status(400).json({ msg: "Something Went Wrong" });
       }
       if (campaigns) {
-        return res.status(400).json({ campaigns });
+        return res.status(200).json({ campaigns });
       }
     });
 };
@@ -122,7 +122,7 @@ exports.deleteCampaign = (req, res) => {
       return res.status(400).json({ msg: "Something Went Wrong", error });
     }
     if (success) {
-      return res.status(201).json({ msg: "Campaign Deleted!" });
+      return res.status(200).json({ msg: "Campaign Deleted!" });
     }
   });
 };
