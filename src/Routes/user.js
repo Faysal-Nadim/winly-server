@@ -5,14 +5,17 @@ const {
   sendVerificationCode,
   verifyEmail,
   signout,
-  resetPassword,
   adminSignin,
   adminSignup,
+  updateImage,
+  updateProfileData,
+  changePassword,
 } = require("../Controllers/user");
 const {
   requireSignIn,
   userMiddleware,
   adminMiddleware,
+  passwordVerification,
 } = require("../Middlewares");
 const router = express.Router();
 
@@ -23,10 +26,24 @@ router.get("/user/auth/signout", signout);
 router.post("/user/auth/email/sendcode", sendVerificationCode);
 router.post("/user/auth/email/verify", verifyEmail);
 router.post(
-  "/user/auth/resetpassword",
+  "/user/auth/change-password",
   requireSignIn,
   userMiddleware,
-  resetPassword
+  passwordVerification,
+  changePassword
+);
+router.post(
+  "/user/auth/update/img",
+  requireSignIn,
+  userMiddleware,
+  updateImage
+);
+router.post(
+  "/user/auth/update/profile",
+  requireSignIn,
+  userMiddleware,
+  passwordVerification,
+  updateProfileData
 );
 
 //Admin Routes

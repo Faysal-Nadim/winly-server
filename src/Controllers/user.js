@@ -28,6 +28,7 @@ exports.signup = (req, res) => {
         gender,
         dob,
         country,
+        dialCode,
       } = req.body;
       const picture = req.file;
       const hash_password = await bcrypt.hash(password, 10);
@@ -41,6 +42,7 @@ exports.signup = (req, res) => {
         gender,
         dob,
         country,
+        dialCode,
       });
       _user.save((err, user) => {
         if (err) {
@@ -78,9 +80,11 @@ exports.signin = (req, res) => {
           phone,
           role,
           gender,
-          picture,
+          img,
           dob,
           country,
+          dialCode,
+          wallet,
         } = user;
         return res.status(200).json({
           msg: "Login Success",
@@ -94,9 +98,11 @@ exports.signin = (req, res) => {
             phone,
             role,
             gender,
-            picture,
+            img,
             dob,
             country,
+            dialCode,
+            wallet,
           },
         });
       }
@@ -191,9 +197,11 @@ exports.adminSignin = (req, res) => {
           phone,
           role,
           gender,
-          picture,
+          img,
           dob,
           country,
+          dialCode,
+          wallet,
         } = user;
         return res.status(200).json({
           msg: "Login Success",
@@ -207,9 +215,11 @@ exports.adminSignin = (req, res) => {
             phone,
             role,
             gender,
-            picture,
+            img,
             dob,
             country,
+            dialCode,
+            wallet,
           },
         });
       }
@@ -324,7 +334,7 @@ exports.signout = (req, res) => {
   });
 };
 
-exports.resetPassword = async (req, res) => {
+exports.changePassword = async (req, res) => {
   const hash_password = await bcrypt.hash(req.body.newPassword, 10);
   User.findOneAndUpdate(
     { _id: req.user._id },
@@ -333,6 +343,117 @@ exports.resetPassword = async (req, res) => {
   ).exec((error, user) => {
     if (user) {
       return res.status(200).json({ user });
+    }
+    if (error) {
+      return res.status(400).json({ error });
+    }
+  });
+};
+
+exports.updateProfileData = (req, res) => {
+  const { firstName, lastName, gender, dob, dialCode, phone, country } =
+    req.body;
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    {
+      $set: {
+        firstName: firstName,
+        lastName: lastName,
+        gender: gender,
+        dob: dob,
+        dialCode: dialCode,
+        phone: phone,
+        country: country,
+      },
+    },
+    { new: true }
+  ).exec((error, user) => {
+    if (user) {
+      const {
+        _id,
+        firstName,
+        lastName,
+        fullName,
+        email,
+        phone,
+        role,
+        gender,
+        img,
+        dob,
+        country,
+        dialCode,
+        wallet,
+      } = user;
+      return res.status(200).json({
+        msg: "Profile Information Updated",
+        user: {
+          _id,
+          firstName,
+          lastName,
+          fullName,
+          email,
+          phone,
+          role,
+          gender,
+          img,
+          dob,
+          country,
+          dialCode,
+          wallet,
+        },
+      });
+    }
+    if (error) {
+      return res.status(400).json({ error });
+    }
+  });
+};
+
+exports.updateImage = (req, res) => {
+  const img = req.body.img;
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    {
+      $set: {
+        img: img,
+      },
+    },
+    { new: true }
+  ).exec((error, user) => {
+    if (user) {
+      const {
+        _id,
+        firstName,
+        lastName,
+        fullName,
+        email,
+        phone,
+        role,
+        gender,
+        img,
+        dob,
+        country,
+        dialCode,
+        wallet,
+      } = user;
+      return res.status(200).json({
+        msg: "Picture Updated",
+        user: {
+          _id,
+          firstName,
+          lastName,
+          fullName,
+          email,
+          phone,
+          role,
+          gender,
+          img,
+          dob,
+          country,
+          dialCode,
+          wallet,
+        },
+      });
     }
     if (error) {
       return res.status(400).json({ error });

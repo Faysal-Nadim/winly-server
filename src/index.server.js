@@ -26,7 +26,7 @@ mongoose
   .catch((err) => console.log(err));
 mongoose.set("strictQuery", true);
 //Server Config
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.options("*", cors());
 app.use(express.json());
 

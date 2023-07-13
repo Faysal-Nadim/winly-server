@@ -37,6 +37,17 @@ const campaignSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["Drafted", "Published", "Expired"],
+      required: true,
+    },
+    displayStatus: {
+      type: String,
+      enum: ["Featured", "Selling Fast"],
+      default: null,
+    },
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      default: null,
     },
   },
   { timestamps: true }

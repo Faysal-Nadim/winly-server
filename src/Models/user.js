@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    dialCode: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: String,
       required: true,
