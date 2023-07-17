@@ -72,6 +72,20 @@ const campaignSchema = new mongoose.Schema(
       type: Number,
       default: 1,
     },
+    offer: {
+      validity: {
+        type: Number,
+        default: 0,
+      },
+      percentage: {
+        type: Number,
+        default: 0,
+      },
+      minAmount: {
+        type: Number,
+        default: 0,
+      },
+    },
   },
   { timestamps: true }
 );

@@ -63,3 +63,22 @@ exports.getCart = (req, res) => {
       }
     });
 };
+
+exports.removeCart = (req, res) => {
+  Cart.updateOne(
+    { user: req.user._id },
+    {
+      $pull: {
+        cartItems: {
+          _id: req.body._id,
+        },
+      },
+    },
+    { new: true }
+  ).exec((error, result) => {
+    if (error) return res.status(400).json({ error });
+    if (result) {
+      res.status(202).json({ result });
+    }
+  });
+};
