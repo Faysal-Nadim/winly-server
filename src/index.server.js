@@ -10,7 +10,6 @@ env.config();
 //Route Config
 const userRoute = require("./Routes/user");
 const campaignRoute = require("./Routes/campaign");
-const productRoute = require("./Routes/product");
 const cartRoute = require("./Routes/cart");
 const orderRoute = require("./Routes/order");
 const ticketRoute = require("./Routes/ticket");
@@ -33,7 +32,6 @@ app.use(express.json());
 //API Config
 app.use("/api/v1", userRoute);
 app.use("/api/v1", campaignRoute);
-app.use("/api/v1", productRoute);
 app.use("/api/v1", cartRoute);
 app.use("/api/v1", orderRoute);
 app.use("/api/v1", ticketRoute);
