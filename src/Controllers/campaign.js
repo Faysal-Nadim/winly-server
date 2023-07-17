@@ -1,17 +1,29 @@
 const Campaign = require("../Models/campaign");
-const Product = require("../Models/product");
 
 exports.createCampaign = (req, res) => {
-  const { title, validity, draw_date, status, product, displayStatus, img } =
-    req.body;
-  const D = new Date(validity);
+  const {
+    title,
+    productTitle,
+    ticketQty,
+    stockQty,
+    price,
+    validity,
+    drawDate,
+    status,
+    displayStatus,
+    img,
+  } = req.body;
+  const D = new Date();
   const _campaign = new Campaign({
     title,
-    validity: D.getTime(),
+    productTitle,
+    ticketQty,
+    stockQty,
+    price,
+    validity: D.getTime(validity),
     img,
-    draw_date,
+    drawDate: D.toDateString(drawDate),
     status,
-    product,
     displayStatus,
   });
 
@@ -26,55 +38,40 @@ exports.createCampaign = (req, res) => {
 };
 
 exports.getCampaign = (req, res) => {
-  Campaign.find()
-    .populate({ path: "product" })
-    .exec((error, campaigns) => {
-      if (error) {
-        return res.status(400).json({ msg: "Something Went Wrong" });
-      }
-      if (campaigns) {
-        return res.status(200).json({
-          campaigns: {
-            hero: campaigns.filter(
-              (c) => c.status === "Published" && c.displayStatus === "Hero"
-            ),
-            sellingFast: campaigns.filter(
-              (c) =>
-                c.status === "Published" && c.displayStatus === "Selling Fast"
-            ),
-            upcoming: campaigns.filter(
-              (c) => c.status === "Published" && c.displayStatus === "Upcoming"
-            ),
-            explore: campaigns.filter(
-              (c) => c.status === "Published" && c.displayStatus === "Explore"
-            ),
-            expired: campaigns.filter((c) => c.status === "Expired"),
-          },
-        });
-      }
-    });
-};
-
-exports.getAllCampaign = (req, res) => {
-  Campaign.find()
-    .populate({ path: "product" })
-    .exec((error, campaigns) => {
-      if (error) {
-        return res.status(400).json({ msg: "Something Went Wrong" });
-      }
-      if (campaigns) {
-        return res.status(200).json({ campaigns });
-      }
-    });
-};
-
-exports.getProductByCampaign = (req, res) => {
-  Product.find({ campaign: req.body.campaign }).exec((error, products) => {
+  Campaign.find().exec((error, campaigns) => {
     if (error) {
       return res.status(400).json({ msg: "Something Went Wrong" });
     }
-    if (products) {
-      return res.status(200).json({ products });
+    if (campaigns) {
+      return res.status(200).json({
+        campaigns: {
+          hero: campaigns.filter(
+            (c) => c.status === "Published" && c.displayStatus === "Hero"
+          ),
+          sellingFast: campaigns.filter(
+            (c) =>
+              c.status === "Published" && c.displayStatus === "Selling Fast"
+          ),
+          upcoming: campaigns.filter(
+            (c) => c.status === "Published" && c.displayStatus === "Upcoming"
+          ),
+          explore: campaigns.filter(
+            (c) => c.status === "Published" && c.displayStatus === "Explore"
+          ),
+          expired: campaigns.filter((c) => c.status === "Expired"),
+        },
+      });
+    }
+  });
+};
+
+exports.getAllCampaign = (req, res) => {
+  Campaign.find().exec((error, campaigns) => {
+    if (error) {
+      return res.status(400).json({ msg: "Something Went Wrong" });
+    }
+    if (campaigns) {
+      return res.status(200).json({ campaigns });
     }
   });
 };
@@ -83,25 +80,31 @@ exports.updateCampaign = (req, res) => {
   const {
     _id,
     title,
+    productTitle,
+    ticketQty,
+    stockQty,
+    price,
     validity,
-    draw_date,
+    drawDate,
     status,
-    products,
     displayStatus,
     img,
   } = req.body;
-  const D = new Date(validity);
+  const D = new Date();
 
   Campaign.findOneAndUpdate(
     { _id: _id },
     {
       $set: {
         title: title,
-        validity: D.getTime(),
+        productTitle: productTitle,
+        ticketQty: ticketQty,
+        stockQty: stockQty,
+        price: price,
+        validity: D.getTime(validity),
         img: img,
-        draw_date: draw_date,
+        drawDate: drawDate,
         status: status,
-        products: products,
         displayStatus: displayStatus,
       },
     },

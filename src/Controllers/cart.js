@@ -6,16 +6,16 @@ exports.addToCart = (req, res) => {
       return res.status(400).json({ msg: "Something Went Wrong." });
     }
     if (cart) {
-      const productID = req.body.cartItems.product;
-      const product = cart.cartItems.find((c) => c.product == productID);
+      const campaignID = req.body.cartItems.campaign;
+      const campaign = cart.cartItems.find((c) => c.campaign == campaignID);
       let condition, update;
-      if (product) {
-        condition = { user: req.user._id, "cartItems.product": productID };
+      if (campaign) {
+        condition = { user: req.user._id, "cartItems.campaign": campaignID };
         update = {
           $set: {
             "cartItems.$": {
               ...req.body.cartItems,
-              qty: product.qty + +req.body.cartItems.qty,
+              qty: campaign.qty + +req.body.cartItems.qty,
             },
           },
         };
@@ -55,8 +55,7 @@ exports.addToCart = (req, res) => {
 
 exports.getCart = (req, res) => {
   Cart.findOne({ user: req.user._id })
-    .populate("cartItems.product", "title img ticketQty campaign")
-
+    .populate({ path: "cartItems.campaign" })
     .exec((error, cart) => {
       if (error) return res.status(400).json({ error });
       if (cart) {

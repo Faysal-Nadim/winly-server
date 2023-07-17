@@ -30,14 +30,12 @@ exports.signup = (req, res) => {
         country,
         dialCode,
       } = req.body;
-      const picture = req.file;
       const hash_password = await bcrypt.hash(password, 10);
       const _user = new User({
         firstName,
         lastName,
         email,
         phone,
-        picture,
         hash_password,
         gender,
         dob,

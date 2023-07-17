@@ -6,19 +6,39 @@ const campaignSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    productTitle: {
+      type: String,
+      required: true,
+    },
     validity: {
       type: Number,
       required: true,
     },
     img: {
-      url: {
+      prize: {
         type: String,
         default: null,
       },
-      key: {
+      product: {
         type: String,
         default: null,
       },
+    },
+    ticketQty: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    stockQty: {
+      type: Number,
+      required: true,
+    },
+    orderCount: {
+      type: Number,
+      default: 0,
     },
     winner: {
       ticketNumber: {
@@ -30,7 +50,7 @@ const campaignSchema = new mongoose.Schema(
         default: null,
       },
     },
-    draw_date: {
+    drawDate: {
       type: String,
       default: null,
     },
@@ -42,11 +62,6 @@ const campaignSchema = new mongoose.Schema(
     displayStatus: {
       type: String,
       enum: ["Hero", "Selling Fast", "Upcoming", "Explore"],
-      default: null,
-    },
-    product: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
       default: null,
     },
   },
