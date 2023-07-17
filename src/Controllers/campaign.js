@@ -12,6 +12,8 @@ exports.createCampaign = (req, res) => {
     status,
     displayStatus,
     img,
+    description,
+    ticketQtyGen,
   } = req.body;
   const Draw = new Date(drawDate);
   const val = new Date(validity);
@@ -26,6 +28,8 @@ exports.createCampaign = (req, res) => {
     drawDate: Draw.toDateString(),
     status,
     displayStatus,
+    description,
+    ticketQtyGen,
   });
 
   _campaign.save((error, campaign) => {
@@ -90,6 +94,8 @@ exports.updateCampaign = (req, res) => {
     status,
     displayStatus,
     img,
+    description,
+    ticketQtyGen,
   } = req.body;
   const D = new Date();
 
@@ -107,6 +113,8 @@ exports.updateCampaign = (req, res) => {
         drawDate: drawDate,
         status: status,
         displayStatus: displayStatus,
+        description: description,
+        ticketQtyGen: ticketQtyGen,
       },
     },
     { new: true }

@@ -64,6 +64,14 @@ const campaignSchema = new mongoose.Schema(
       enum: ["Hero", "Selling Fast", "Upcoming", "Explore"],
       default: null,
     },
+    description: {
+      type: String,
+      default: null,
+    },
+    ticketQtyGen: {
+      type: Number,
+      default: 1,
+    },
   },
   { timestamps: true }
 );
