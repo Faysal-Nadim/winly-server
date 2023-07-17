@@ -13,16 +13,17 @@ exports.createCampaign = (req, res) => {
     displayStatus,
     img,
   } = req.body;
-  const D = new Date();
+  const Draw = new Date(drawDate);
+  const val = new Date(validity);
   const _campaign = new Campaign({
     title,
     productTitle,
     ticketQty,
     stockQty,
     price,
-    validity: D.getTime(validity),
+    validity: val.getTime(),
     img,
-    drawDate: D.toDateString(drawDate),
+    drawDate: Draw.toDateString(),
     status,
     displayStatus,
   });
