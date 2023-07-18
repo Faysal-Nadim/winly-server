@@ -9,7 +9,7 @@ const {
   adminSignup,
   updateImage,
   updateProfileData,
-  changePassword,
+  updatePassword,
 } = require("../Controllers/user");
 const {
   requireSignIn,
@@ -26,11 +26,11 @@ router.get("/user/auth/signout", signout);
 router.post("/user/auth/email/sendcode", sendVerificationCode);
 router.post("/user/auth/email/verify", verifyEmail);
 router.post(
-  "/user/auth/change-password",
+  "/user/auth/password/update",
   requireSignIn,
   userMiddleware,
   passwordVerification,
-  changePassword
+  updatePassword
 );
 router.post(
   "/user/auth/update/img",

@@ -332,7 +332,7 @@ exports.signout = (req, res) => {
   });
 };
 
-exports.changePassword = async (req, res) => {
+exports.updatePassword = async (req, res) => {
   const hash_password = await bcrypt.hash(req.body.newPassword, 10);
   User.findOneAndUpdate(
     { _id: req.user._id },
@@ -340,10 +340,10 @@ exports.changePassword = async (req, res) => {
     { new: true }
   ).exec((error, user) => {
     if (user) {
-      return res.status(200).json({ user });
+      return res.status(200).json({ msg: "Password Updated!" });
     }
     if (error) {
-      return res.status(400).json({ error });
+      return res.status(400).json({ error, msg: "Something Went Wrong!" });
     }
   });
 };
