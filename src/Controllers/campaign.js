@@ -97,7 +97,8 @@ exports.updateCampaign = (req, res) => {
     description,
     ticketQtyGen,
   } = req.body;
-  const D = new Date();
+  const Draw = new Date(drawDate);
+  const val = new Date(validity);
 
   Campaign.findOneAndUpdate(
     { _id: _id },
@@ -108,9 +109,9 @@ exports.updateCampaign = (req, res) => {
         ticketQty: ticketQty,
         stockQty: stockQty,
         price: price,
-        validity: D.getTime(validity),
+        validity: val.getTime(),
         img: img,
-        drawDate: drawDate,
+        drawDate: Draw.toDateString(),
         status: status,
         displayStatus: displayStatus,
         description: description,
