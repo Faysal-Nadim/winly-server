@@ -45,3 +45,14 @@ exports.getTicketByUser = (req, res) => {
       }
     });
 };
+
+exports.getAllTicket = (req, res) => {
+  Ticket.find().exec((error, tickets) => {
+    if (error) {
+      return res.status(400).json({ msg: "Something Went Wrong!" });
+    }
+    if (tickets) {
+      return res.status(200).json({ tickets });
+    }
+  });
+};

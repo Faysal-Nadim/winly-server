@@ -20,3 +20,14 @@ exports.submitMessage = (req, res) => {
     }
   });
 };
+
+exports.getAllMessage = (req, res) => {
+  Message.find().exec((error, messages) => {
+    if (error) {
+      return res.status(400).json({ msg: "Something Went Wrong", error });
+    }
+    if (messages) {
+      return res.status(200).json({ messages });
+    }
+  });
+};

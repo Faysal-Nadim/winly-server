@@ -12,6 +12,7 @@ const {
   updatePassword,
   resetPassword,
   verifyEmailForPassword,
+  getAllUser,
 } = require("../Controllers/user");
 const {
   requireSignIn,
@@ -54,5 +55,6 @@ router.post(
 //Admin Routes
 router.post("/admin/auth/signup", requireSignIn, adminMiddleware, adminSignup);
 router.post("/admin/auth/signin", adminSignin);
+router.post("/admin/get/users", requireSignIn, adminMiddleware, getAllUser);
 
 module.exports = router;

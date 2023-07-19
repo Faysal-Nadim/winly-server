@@ -490,3 +490,14 @@ exports.updateImage = (req, res) => {
     }
   });
 };
+
+exports.getAllUser = (req, res) => {
+  User.find().exec((error, users) => {
+    if (error) {
+      return res.status(400).json({ error });
+    }
+    if (users) {
+      return res.status(400).json({ users });
+    }
+  });
+};
