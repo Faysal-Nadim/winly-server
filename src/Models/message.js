@@ -12,8 +12,8 @@ const messageSchema = new mongoose.Schema(
     },
     topic: {
       type: String,
-      enum: ["Technical", "Generel", "Payment"],
-      default: "Generel",
+      enum: ["Technical", "General", "Payment"],
+      default: "General",
     },
     msg: {
       type: String,
