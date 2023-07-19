@@ -348,6 +348,22 @@ exports.updatePassword = async (req, res) => {
   });
 };
 
+exports.resetPassword = async (req, res) => {
+  const hash_password = await bcrypt.hash(req.body.password, 10);
+  User.findOneAndUpdate(
+    { email: req.body.email },
+    { $set: { hash_password: hash_password } },
+    { new: true }
+  ).exec((error, user) => {
+    if (user) {
+      return res.status(200).json({ msg: "Password Updated!" });
+    }
+    if (error) {
+      return res.status(400).json({ error, msg: "Something Went Wrong!" });
+    }
+  });
+};
+
 exports.updateProfileData = (req, res) => {
   const { firstName, lastName, gender, dob, dialCode, phone, country } =
     req.body;

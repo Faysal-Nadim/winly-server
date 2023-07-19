@@ -10,6 +10,7 @@ const {
   updateImage,
   updateProfileData,
   updatePassword,
+  resetPassword,
 } = require("../Controllers/user");
 const {
   requireSignIn,
@@ -32,6 +33,8 @@ router.post(
   passwordVerification,
   updatePassword
 );
+router.post("/user/auth/password/reset", resetPassword);
+
 router.post(
   "/user/auth/update/img",
   requireSignIn,
