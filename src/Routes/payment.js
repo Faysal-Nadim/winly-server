@@ -1,5 +1,9 @@
 const express = require("express");
-const { createPaymentIntent, getStripeKey } = require("../Controllers/stripe");
+const {
+  createPaymentIntent,
+  getStripeKey,
+  getPaypalKey,
+} = require("../Controllers/payment");
 const { requireSignIn, userMiddleware } = require("../Middlewares");
 const router = express.Router();
 
@@ -14,6 +18,12 @@ router.post(
   requireSignIn,
   userMiddleware,
   createPaymentIntent
+);
+router.get(
+  "/payment/paypal/get-key",
+  requireSignIn,
+  userMiddleware,
+  getPaypalKey
 );
 
 module.exports = router;

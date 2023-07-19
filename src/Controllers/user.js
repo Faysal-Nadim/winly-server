@@ -325,6 +325,22 @@ exports.verifyEmail = (req, res) => {
   });
 };
 
+exports.verifyEmailForPassword = (req, res) => {
+  User.findOne({ email: req.body.email }).exec((error, user) => {
+    if (error) {
+      return res.status(400).json({ msg: "Something Went Wrong! Try Again." });
+    }
+    if (user && user.verification.code === req.body.code) {
+      return res
+        .status(202)
+        .json({ msg: "Verification Success! Please Login Again." });
+    }
+    if (user && user.verification.code !== req.body.code) {
+      return res.status(400).json({ msg: "Email Verification Failed!" });
+    }
+  });
+};
+
 exports.signout = (req, res) => {
   res.clearCookie("token");
   res.status(200).json({

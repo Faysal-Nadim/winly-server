@@ -11,6 +11,7 @@ const {
   updateProfileData,
   updatePassword,
   resetPassword,
+  verifyEmailForPassword,
 } = require("../Controllers/user");
 const {
   requireSignIn,
@@ -26,6 +27,7 @@ router.post("/user/auth/signin", signin);
 router.get("/user/auth/signout", signout);
 router.post("/user/auth/email/sendcode", sendVerificationCode);
 router.post("/user/auth/email/verify", verifyEmail);
+router.post("/user/auth/password/email/verify", verifyEmailForPassword);
 router.post(
   "/user/auth/password/update",
   requireSignIn,

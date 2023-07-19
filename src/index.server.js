@@ -13,7 +13,7 @@ const campaignRoute = require("./Routes/campaign");
 const cartRoute = require("./Routes/cart");
 const orderRoute = require("./Routes/order");
 const ticketRoute = require("./Routes/ticket");
-const stripeRoute = require("./Routes/stripe");
+const paymentRoute = require("./Routes/payment");
 const messageRoute = require("./Routes/message");
 
 //Database Config
@@ -36,7 +36,7 @@ app.use("/api/v1", campaignRoute);
 app.use("/api/v1", cartRoute);
 app.use("/api/v1", orderRoute);
 app.use("/api/v1", ticketRoute);
-app.use("/api/v1", stripeRoute);
+app.use("/api/v1", paymentRoute);
 app.use("/api/v1", messageRoute);
 
 app.listen(process.env.PORT, () => {

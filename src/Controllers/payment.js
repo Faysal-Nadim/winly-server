@@ -4,6 +4,10 @@ exports.getStripeKey = (req, res) => {
   res.send({ publishableKey: process.env.STRIPE_KEY });
 };
 
+exports.getPaypalKey = (req, res) => {
+  res.send({ publishableKey: process.env.PAYPAL_KEY });
+};
+
 exports.createPaymentIntent = async (req, res) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
