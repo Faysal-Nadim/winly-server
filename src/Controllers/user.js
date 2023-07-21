@@ -497,7 +497,7 @@ exports.getAllUser = (req, res) => {
       return res.status(400).json({ error });
     }
     if (users) {
-      return res.status(400).json({ users });
+      return res.status(200).json({ users });
     }
   });
 };
