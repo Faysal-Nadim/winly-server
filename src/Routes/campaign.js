@@ -12,11 +12,21 @@ const { requireSignIn, adminMiddleware } = require("../Middlewares");
 const router = express.Router();
 
 router.post("/campaign/create", requireSignIn, adminMiddleware, createCampaign);
-router.post("/campaign/update", updateCampaign);
-router.post("/campaign/update/status", updateStatus);
-router.post("/campaign/update/display-status", updateDisplayStatus);
-router.post("/campaign/delete", deleteCampaign);
-router.get("/campaign/get/all", getAllCampaign);
+router.post("/campaign/update", requireSignIn, adminMiddleware, updateCampaign);
+router.post(
+  "/campaign/update/status",
+  requireSignIn,
+  adminMiddleware,
+  updateStatus
+);
+router.post(
+  "/campaign/update/display-status",
+  requireSignIn,
+  adminMiddleware,
+  updateDisplayStatus
+);
+router.post("/campaign/delete", requireSignIn, adminMiddleware, deleteCampaign);
+router.get("/campaign/get/all", requireSignIn, adminMiddleware, getAllCampaign);
 router.get("/campaign/get", getCampaign);
 
 module.exports = router;
