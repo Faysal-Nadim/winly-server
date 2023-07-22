@@ -20,6 +20,26 @@ exports.submitMessage = (req, res) => {
     }
   });
 };
+exports.updateMessage = (req, res) => {
+  const { _id } = req.body;
+
+  // console.log(req.body);
+
+  Message.findOneAndUpdate(
+    { _id: _id },
+    {
+      $set: req?.body,
+    },
+    { new: true }
+  ).exec((error, _msg) => {
+    if (error) {
+      return res.status(400).json({ msg: "Something Went Wrong", error });
+    }
+    if (_msg) {
+      return res.status(200).json({ msg: "Resolved!", _msg });
+    }
+  });
+};
 
 exports.getAllMessage = (req, res) => {
   Message.find().exec((error, messages) => {
