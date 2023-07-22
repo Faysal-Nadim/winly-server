@@ -59,11 +59,15 @@ const campaignSchema = new mongoose.Schema(
       enum: ["Drafted", "Published", "Expired"],
       required: true,
     },
-    displayStatus: {
-      type: String,
-      enum: ["Hero", "Selling Fast", "Upcoming", "Explore"],
-      default: null,
-    },
+    displayStatus: [
+      {
+        status: {
+          type: String,
+          enum: ["Hero", "Selling Fast", "Upcoming", "Explore"],
+          default: null,
+        },
+      },
+    ],
     description: {
       type: String,
       default: null,

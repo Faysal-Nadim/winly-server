@@ -21,8 +21,7 @@ router.post(
 );
 router.post(
   "/campaign/update/display-status",
-  requireSignIn,
-  adminMiddleware,
+
   updateDisplayStatus
 );
 router.post("/campaign/delete", requireSignIn, adminMiddleware, deleteCampaign);

@@ -51,17 +51,26 @@ exports.getCampaign = (req, res) => {
       return res.status(200).json({
         campaigns: {
           hero: campaigns.filter(
-            (c) => c.status === "Published" && c.displayStatus === "Hero"
+            (c) =>
+              c.status === "Published" &&
+              c.displayStatus.find((e) => {
+                return e.status === "Hero";
+              })
           ),
           sellingFast: campaigns.filter(
             (c) =>
-              c.status === "Published" && c.displayStatus === "Selling Fast"
+              c.status === "Published" &&
+              c.displayStatus.find((e) => e.status === "Selling Fast")
           ),
           upcoming: campaigns.filter(
-            (c) => c.status === "Published" && c.displayStatus === "Upcoming"
+            (c) =>
+              c.status === "Published" &&
+              c.displayStatus.find((e) => e.status === "Upcoming")
           ),
           explore: campaigns.filter(
-            (c) => c.status === "Published" && c.displayStatus === "Explore"
+            (c) =>
+              c.status === "Published" &&
+              c.displayStatus.find((e) => e.status === "Explore")
           ),
           expired: campaigns.filter((c) => c.status === "Expired"),
         },

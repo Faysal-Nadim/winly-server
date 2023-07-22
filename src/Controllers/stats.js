@@ -32,7 +32,6 @@ exports.getAllStats = async (req, res) => {
       userCount,
     });
   } catch (error) {
-    console.error("Error fetching stats:", error);
     res.status(400).json({ error: "Failed to get stats" });
   }
 };
