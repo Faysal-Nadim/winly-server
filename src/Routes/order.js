@@ -13,12 +13,13 @@ router.post(
   placeOrder
 );
 
+
 router.get(
   "/admin/order/get/all",
   requireSignIn,
   adminMiddleware,
   getAllOrders
 );
-// router.get("/admin/order/get/all", getAllOrders);
+
 
 module.exports = router;
