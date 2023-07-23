@@ -122,7 +122,9 @@ exports.updateCampaign = (req, res) => {
         img: img,
         drawDate: Draw.toDateString(),
         status: status,
-        displayStatus: displayStatus,
+        displayStatus: displayStatus.map((c) => {
+          return { status: c.status };
+        }),
         description: description,
         ticketQtyGen: ticketQtyGen,
       },
