@@ -2,7 +2,8 @@ const express = require("express");
 const {
   createPaymentIntent,
   getStripeKey,
-  getPaypalKey,
+  createPaypalOrder,
+  capturePaypalPayment,
 } = require("../Controllers/payment");
 const { requireSignIn, userMiddleware } = require("../Middlewares");
 const router = express.Router();
@@ -19,11 +20,8 @@ router.post(
   userMiddleware,
   createPaymentIntent
 );
-router.get(
-  "/payment/paypal/get-key",
-  requireSignIn,
-  userMiddleware,
-  getPaypalKey
-);
+
+router.post("/payment/paypal/create-order", createPaypalOrder);
+router.post("/payment/paypal/capture-order", capturePaypalPayment);
 
 module.exports = router;
