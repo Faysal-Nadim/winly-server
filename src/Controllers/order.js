@@ -4,7 +4,7 @@ const Campaign = require("../Models/campaign");
 const User = require("../Models/user");
 
 exports.placeOrder = (req, res) => {
-  const { orderTotal, orderItems, orderID, address } = req.body;
+  const { orderTotal, orderItems, orderID, address, trxID } = req.body;
   const _order = new Order({
     user: req.user._id,
     orderID: orderID,
@@ -12,6 +12,7 @@ exports.placeOrder = (req, res) => {
     orderTotal: orderTotal,
     tickets: req.data,
     address: address,
+    trxID: trxID,
   });
   _order.save((error, order) => {
     if (error) {

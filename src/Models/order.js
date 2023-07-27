@@ -11,6 +11,10 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    trxID: {
+      type: String,
+      default: null,
+    },
     orderItems: [
       {
         price: {
