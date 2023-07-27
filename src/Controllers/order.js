@@ -18,6 +18,14 @@ exports.placeOrder = (req, res) => {
       return res.status(400).json(error);
     }
     if (order) {
+      order.orderItems.forEach((e) => {
+        Campaign.findOne({ _id: e.campaign_id }).exec((err, campaign) => {
+          Campaign.findOneAndUpdate(
+            { _id: campaign._id },
+            { $set: { orderCount: campaign.orderCount + e.qty } }
+          ).exec();
+        });
+      });
       return res.status(201).json(order);
     }
   });
