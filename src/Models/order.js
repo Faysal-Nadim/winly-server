@@ -13,7 +13,7 @@ const orderSchema = new mongoose.Schema(
     },
     trxID: {
       type: String,
-      default: null,
+      required: true,
     },
     orderItems: [
       {
