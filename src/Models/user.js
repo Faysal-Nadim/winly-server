@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    nationality: {
+      type: String,
+      required: true,
+    },
     wallet: {
       available: {
         type: Number,

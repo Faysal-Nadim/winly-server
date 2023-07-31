@@ -29,6 +29,7 @@ exports.signup = (req, res) => {
         dob,
         country,
         dialCode,
+        nationality,
       } = req.body;
       const hash_password = await bcrypt.hash(password, 10);
       const _user = new User({
@@ -41,6 +42,7 @@ exports.signup = (req, res) => {
         dob,
         country,
         dialCode,
+        nationality,
       });
       _user.save((err, user) => {
         if (err) {
@@ -83,6 +85,7 @@ exports.signin = (req, res) => {
           country,
           dialCode,
           wallet,
+          nationality,
         } = user;
         return res.status(200).json({
           msg: "Login Success",
@@ -101,6 +104,7 @@ exports.signin = (req, res) => {
             country,
             dialCode,
             wallet,
+            nationality,
           },
         });
       }
@@ -144,6 +148,7 @@ exports.adminSignup = (req, res) => {
         gender,
         dob,
         country,
+        nationality,
       } = req.body;
       const picture = req.file;
       const hash_password = await bcrypt.hash(password, 10);
@@ -158,6 +163,7 @@ exports.adminSignup = (req, res) => {
         dob,
         country,
         role: "admin",
+        nationality,
       });
       _user.save((err, user) => {
         if (err) {
@@ -200,6 +206,7 @@ exports.adminSignin = (req, res) => {
           country,
           dialCode,
           wallet,
+          nationality,
         } = user;
         return res.status(200).json({
           msg: "Login Success",
@@ -218,6 +225,7 @@ exports.adminSignin = (req, res) => {
             country,
             dialCode,
             wallet,
+            nationality,
           },
         });
       }
