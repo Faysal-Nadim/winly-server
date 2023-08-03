@@ -13,6 +13,7 @@ exports.createCampaign = (req, res) => {
     displayStatus,
     img,
     description,
+    prizeDiscription,
     ticketQtyGen,
   } = req.body;
   const Draw = new Date(drawDate);
@@ -29,6 +30,7 @@ exports.createCampaign = (req, res) => {
     status,
     displayStatus,
     description,
+    prizeDiscription,
     ticketQtyGen,
   });
 
@@ -102,6 +104,7 @@ exports.updateCampaign = (req, res) => {
     drawDate,
     status,
     displayStatus,
+    prizeDiscription,
     img,
     description,
     ticketQtyGen,
@@ -126,6 +129,7 @@ exports.updateCampaign = (req, res) => {
           return { status: c.status };
         }),
         description: description,
+        prizeDiscription: prizeDiscription,
         ticketQtyGen: ticketQtyGen,
       },
     },

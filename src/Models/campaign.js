@@ -72,6 +72,10 @@ const campaignSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    prizeDiscription: {
+      type: String,
+      default: null,
+    },
     ticketQtyGen: {
       type: Number,
       default: 1,
