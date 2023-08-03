@@ -23,6 +23,23 @@ exports.getAllStats = async (req, res) => {
       User.countDocuments().exec(),
     ]);
 
+    const pipeline = [
+      {
+        $group: {
+          _id: null,
+          totalSum: { $sum: "$orderTotal" },
+        },
+      },
+    ];
+
+    const result = await Order.aggregate(pipeline);
+    let earningCount = 0;
+    if (result.length > 0) {
+      earningCount = result[0].totalSum;
+    } else {
+      earningCount = 0;
+    }
+
     res.json({
       campaignCount,
       cartCount,
@@ -30,6 +47,7 @@ exports.getAllStats = async (req, res) => {
       orderCount,
       ticketCount,
       userCount,
+      earningCount,
     });
   } catch (error) {
     res.status(400).json({ error: "Failed to get stats" });
