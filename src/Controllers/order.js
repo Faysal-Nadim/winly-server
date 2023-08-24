@@ -19,15 +19,53 @@ exports.placeOrder = (req, res) => {
       return res.status(400).json(error);
     }
     if (order) {
-      order.orderItems.forEach((e) => {
-        Campaign.findOne({ _id: e.campaign_id }).exec((err, campaign) => {
-          Campaign.findOneAndUpdate(
-            { _id: campaign._id },
-            { $set: { orderCount: campaign.orderCount + e.qty } }
-          ).exec();
+      User.findOneAndUpdate(
+        { _id: req.user._id },
+        { $set: { wallet: { available: 0 } } },
+        { new: true }
+      ).exec((error, user) => {
+        const {
+          _id,
+          firstName,
+          lastName,
+          fullName,
+          email,
+          phone,
+          role,
+          gender,
+          img,
+          dob,
+          country,
+          dialCode,
+          wallet,
+        } = user;
+        order.orderItems.forEach((e) => {
+          Campaign.findOne({ _id: e.campaign_id }).exec((err, campaign) => {
+            Campaign.findOneAndUpdate(
+              { _id: campaign._id },
+              { $set: { orderCount: campaign.orderCount + e.qty } }
+            ).exec();
+          });
+        });
+        return res.status(201).json({
+          order,
+          user: {
+            _id,
+            firstName,
+            lastName,
+            fullName,
+            email,
+            phone,
+            role,
+            gender,
+            img,
+            dob,
+            country,
+            dialCode,
+            wallet,
+          },
         });
       });
-      return res.status(201).json(order);
     }
   });
 };
