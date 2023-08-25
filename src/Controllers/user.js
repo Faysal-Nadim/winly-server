@@ -265,17 +265,17 @@ exports.sendVerificationCode = (req, res) => {
     }
     if (data) {
       const transporter = nodemailer.createTransport({
-        host: "mail.winly.ae",
+        host: "mail.privateemail.com",
         port: 465,
         secure: true,
         auth: {
-          user: "no-reply@winly.ae",
+          user: "no-reply@winly.net",
           pass: `${process.env.EMAIL_PASS}`,
         },
       });
 
       const info = await transporter.sendMail({
-        from: "Winly <no-reply@winly.ae>",
+        from: "Winly LLC.<no-reply@winly.net>",
         to: `${req.body.email}`,
         subject: "Verification Code From Winly",
         text: `Your Verification Code Is ${data.verification.code}. This code will expire in 120 seconds.`, // plain text body
