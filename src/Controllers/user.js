@@ -389,8 +389,16 @@ exports.resetPassword = async (req, res) => {
 };
 
 exports.updateProfileData = (req, res) => {
-  const { firstName, lastName, gender, dob, dialCode, phone, country } =
-    req.body;
+  const {
+    firstName,
+    lastName,
+    gender,
+    dob,
+    dialCode,
+    phone,
+    country,
+    nationality,
+  } = req.body;
   User.findOneAndUpdate(
     { _id: req.user._id },
     {
@@ -402,6 +410,7 @@ exports.updateProfileData = (req, res) => {
         dialCode: dialCode,
         phone: phone,
         country: country,
+        nationality: nationality,
       },
     },
     { new: true }
@@ -421,6 +430,7 @@ exports.updateProfileData = (req, res) => {
         country,
         dialCode,
         wallet,
+        nationality,
       } = user;
       return res.status(200).json({
         msg: "Profile Information Updated",
@@ -438,6 +448,7 @@ exports.updateProfileData = (req, res) => {
           country,
           dialCode,
           wallet,
+          nationality,
         },
       });
     }
@@ -473,6 +484,7 @@ exports.updateImage = (req, res) => {
         country,
         dialCode,
         wallet,
+        nationality,
       } = user;
       return res.status(200).json({
         msg: "Picture Updated",
@@ -490,6 +502,7 @@ exports.updateImage = (req, res) => {
           country,
           dialCode,
           wallet,
+          nationality,
         },
       });
     }
