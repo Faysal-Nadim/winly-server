@@ -6,6 +6,9 @@ const {
   capturePaypalPayment,
   getRfid,
   updateWallet,
+  createCustomer,
+  createSetupIntent,
+  getPaymentMethods,
 } = require("../Controllers/payment");
 const { requireSignIn, userMiddleware } = require("../Middlewares");
 const router = express.Router();
@@ -22,10 +25,20 @@ router.post(
   userMiddleware,
   createPaymentIntent
 );
+router.post(
+  "/payment/stripe/create-setup-intent",
+  requireSignIn,
+  userMiddleware,
+  createSetupIntent
+);
+router.post(
+  "/payment/stripe/get-payment-methods",
+  requireSignIn,
+  userMiddleware,
+  getPaymentMethods
+);
 
 router.post("/payment/paypal/create-order", createPaypalOrder);
 router.post("/payment/paypal/capture-order", capturePaypalPayment);
-// router.get("/rfid", getRfid);
-// router.get("/order/update", updateWallet);
 
 module.exports = router;

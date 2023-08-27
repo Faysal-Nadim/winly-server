@@ -3,6 +3,7 @@ const fetch = require("node-fetch");
 const User = require("../Models/user");
 const Order = require("../Models/order");
 
+//Stripe
 exports.getStripeKey = (req, res) => {
   res.send({ publishableKey: process.env.STRIPE_KEY });
 };
@@ -26,6 +27,34 @@ exports.createPaymentIntent = async (req, res) => {
       },
     });
   }
+};
+
+exports.createCustomer = async (req, res, next) => {
+  const customer = await stripe.customers.create({
+    email: req.body.email,
+    name: `${req.body.firstName} ${req.body.lastName}`,
+  });
+  req.customer = customer;
+  next();
+};
+
+exports.createSetupIntent = async (req, res) => {
+  const setupIntent = await stripe.setupIntents.create({
+    customer: req.body.customer,
+    automatic_payment_methods: {
+      enabled: true,
+    },
+  });
+  res.send({
+    clientSecret: setupIntent.client_secret,
+  });
+};
+
+exports.getPaymentMethods = async (req, res) => {
+  const methods = await stripe.customers.listPaymentMethods(req.body.customer, {
+    type: "card",
+  });
+  return res.status(200).json({ methods: methods.data });
 };
 
 //Paypal
@@ -118,38 +147,4 @@ exports.capturePaypalPayment = async (req, res) => {
 
 // exports.createPaymobPayment = () => {
 //   const url = ` https://uae.paymob.com/v1/intention/`;
-// };
-
-// exports.getRfid = (req, res) => {
-//   console.log(req.query);
-//   return res.status(201).json("Sucess");
-// };
-
-// exports.updateWallet = (req, res) => {
-//   User.find().exec((error, users) => {
-//     if (users) {
-//       users.forEach((e) => {
-//         Order.find({ user: e._id }).exec((err, order) => {
-//           // if (order) {
-//           //   User.findOneAndUpdate(
-//           //     { _id: e._id },
-//           //     { $set: { wallet: { available: 15 } } },
-//           //     { new: true }
-//           //   ).exec();
-//           // }
-//           if (order.length <= 0) {
-//             User.findOneAndUpdate(
-//               { _id: e._id },
-//               { $set: { wallet: { available: 10 } } },
-//               { new: true }
-//             ).exec();
-//           }
-//         });
-//       });
-//       return res.status(200).json({ msg: "Success", users });
-//     }
-//     if (error) {
-//       return res.status(400).json({ msg: "Failed" });
-//     }
-//   });
 // };

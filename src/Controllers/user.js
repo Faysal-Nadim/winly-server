@@ -43,6 +43,7 @@ exports.signup = (req, res) => {
         country,
         dialCode,
         nationality,
+        stripe_id: req.customer.id,
       });
       _user.save((err, user) => {
         if (err) {
@@ -86,6 +87,7 @@ exports.signin = (req, res) => {
           dialCode,
           wallet,
           nationality,
+          stripe_id,
         } = user;
         return res.status(200).json({
           msg: "Login Success",
@@ -105,6 +107,7 @@ exports.signin = (req, res) => {
             dialCode,
             wallet,
             nationality,
+            stripe_id,
           },
         });
       }
@@ -431,6 +434,7 @@ exports.updateProfileData = (req, res) => {
         dialCode,
         wallet,
         nationality,
+        stripe_id,
       } = user;
       return res.status(200).json({
         msg: "Profile Information Updated",
@@ -449,6 +453,7 @@ exports.updateProfileData = (req, res) => {
           dialCode,
           wallet,
           nationality,
+          stripe_id,
         },
       });
     }
@@ -485,6 +490,7 @@ exports.updateImage = (req, res) => {
         dialCode,
         wallet,
         nationality,
+        stripe_id,
       } = user;
       return res.status(200).json({
         msg: "Picture Updated",
@@ -503,6 +509,7 @@ exports.updateImage = (req, res) => {
           dialCode,
           wallet,
           nationality,
+          stripe_id,
         },
       });
     }

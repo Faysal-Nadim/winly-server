@@ -81,6 +81,28 @@ const userSchema = new mongoose.Schema(
         default: null,
       },
     },
+    stripe_id: {
+      type: String,
+      default: null,
+    },
+    notification: {
+      email: {
+        type: Boolean,
+        default: true,
+      },
+      sms: {
+        type: Boolean,
+        default: true,
+      },
+      wp: {
+        type: Boolean,
+        default: true,
+      },
+      pn: {
+        type: Boolean,
+        default: true,
+      },
+    },
   },
   { timestamps: true }
 );

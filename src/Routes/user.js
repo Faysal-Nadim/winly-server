@@ -1,4 +1,5 @@
 const express = require("express");
+const { createCustomer } = require("../Controllers/payment");
 const {
   signup,
   signin,
@@ -23,7 +24,7 @@ const {
 const router = express.Router();
 
 //User Routes
-router.post("/user/auth/signup", signup);
+router.post("/user/auth/signup", createCustomer, signup);
 router.post("/user/auth/signin", signin);
 router.get("/user/auth/signout", signout);
 router.post("/user/auth/email/sendcode", sendVerificationCode);
