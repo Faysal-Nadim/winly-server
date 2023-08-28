@@ -29,6 +29,31 @@ exports.createPaymentIntent = async (req, res) => {
   }
 };
 
+exports.createPaymentIntentForCustomer = async (req, res) => {
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: req.body.amount * 100,
+      currency: "aed",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+      customer: req.body.customer_id,
+      payment_method: req.body.payment_id,
+      return_url: "https://winly.net/order/success",
+      off_session: true,
+      confirm: true,
+    });
+    return res.status(200).json({ status: paymentIntent.status });
+  } catch (err) {
+    return res.status(400).send({
+      error: {
+        message: err.message,
+      },
+      err,
+    });
+  }
+};
+
 exports.createCustomer = async (req, res, next) => {
   const customer = await stripe.customers.create({
     email: req.body.email,

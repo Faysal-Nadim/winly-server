@@ -9,6 +9,7 @@ const {
   createCustomer,
   createSetupIntent,
   getPaymentMethods,
+  createPaymentIntentForCustomer,
 } = require("../Controllers/payment");
 const { requireSignIn, userMiddleware } = require("../Middlewares");
 const router = express.Router();
@@ -36,6 +37,10 @@ router.post(
   requireSignIn,
   userMiddleware,
   getPaymentMethods
+);
+router.post(
+  "/payment/stripe/charge-saved-card",
+  createPaymentIntentForCustomer
 );
 
 router.post("/payment/paypal/create-order", createPaypalOrder);
