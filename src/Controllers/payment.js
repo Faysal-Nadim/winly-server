@@ -16,6 +16,8 @@ exports.createPaymentIntent = async (req, res) => {
       automatic_payment_methods: {
         enabled: true,
       },
+      customer: req.body.customer,
+      setup_future_usage: "off_session",
     });
     res.send({
       clientSecret: paymentIntent.client_secret,
