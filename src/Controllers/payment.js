@@ -48,10 +48,7 @@ exports.createPaymentIntentForCustomer = async (req, res) => {
       .json({ status: paymentIntent.status, id: paymentIntent.id });
   } catch (err) {
     return res.status(400).send({
-      error: {
-        message: err.message,
-      },
-      err,
+      msg: err.message,
     });
   }
 };
