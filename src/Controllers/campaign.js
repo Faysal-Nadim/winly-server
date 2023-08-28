@@ -52,6 +52,7 @@ exports.getCampaign = (req, res) => {
     if (campaigns) {
       return res.status(200).json({
         campaigns: {
+          allCampaigns: campaigns,
           hero: campaigns.filter(
             (c) =>
               c.status === "Published" &&
