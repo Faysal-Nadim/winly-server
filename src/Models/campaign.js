@@ -49,6 +49,10 @@ const campaignSchema = new mongoose.Schema(
         type: String,
         default: null,
       },
+      nationality: {
+        type: String,
+        default: null,
+      },
     },
     drawDate: {
       type: String,

@@ -17,6 +17,7 @@ const paymentRoute = require("./Routes/payment");
 const messageRoute = require("./Routes/message");
 const landingPageRoute = require("./Routes/landingPage");
 const statsRoute = require("./Routes/stats");
+const winnerRoute = require("./Routes/winner");
 
 //Database Config
 mongoose
@@ -42,6 +43,7 @@ app.use("/api/v1", paymentRoute);
 app.use("/api/v1", messageRoute);
 app.use("/api/v1", landingPageRoute);
 app.use("/api/v1", statsRoute);
+app.use("/api/v1", winnerRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`Sever Running On PORT ${process.env.PORT}`);

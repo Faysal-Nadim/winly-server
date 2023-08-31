@@ -40,6 +40,8 @@ router.post(
 );
 router.post(
   "/payment/stripe/charge-saved-card",
+  requireSignIn,
+  userMiddleware,
   createPaymentIntentForCustomer
 );
 
