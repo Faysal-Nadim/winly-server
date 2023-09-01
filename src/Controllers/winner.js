@@ -18,6 +18,8 @@ exports.getWinner = (req, res) => {
             country: ticket.user.country,
           },
         });
+      } else {
+        return res.status(404).json({ msg: "Invalid Ticket Number" });
       }
     });
 };

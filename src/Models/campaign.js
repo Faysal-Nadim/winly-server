@@ -42,7 +42,7 @@ const campaignSchema = new mongoose.Schema(
     },
     winner: {
       ticketNumber: {
-        type: Number,
+        type: String,
         default: null,
       },
       userName: {
