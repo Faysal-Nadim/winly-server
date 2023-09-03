@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema(
     wallet: {
       available: {
         type: Number,
-        default: 10,
+        default: 0,
       },
       onHold: {
         type: Number,

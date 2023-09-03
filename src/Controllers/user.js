@@ -88,6 +88,7 @@ exports.signin = (req, res) => {
           wallet,
           nationality,
           stripe_id,
+          notification,
         } = user;
         return res.status(200).json({
           msg: "Login Success",
@@ -108,6 +109,7 @@ exports.signin = (req, res) => {
             wallet,
             nationality,
             stripe_id,
+            notification,
           },
         });
       }
@@ -210,6 +212,7 @@ exports.adminSignin = (req, res) => {
           dialCode,
           wallet,
           nationality,
+          notification,
         } = user;
         return res.status(200).json({
           msg: "Login Success",
@@ -229,6 +232,7 @@ exports.adminSignin = (req, res) => {
             dialCode,
             wallet,
             nationality,
+            notification,
           },
         });
       }
@@ -435,6 +439,7 @@ exports.updateProfileData = (req, res) => {
         wallet,
         nationality,
         stripe_id,
+        notification,
       } = user;
       return res.status(200).json({
         msg: "Profile Information Updated",
@@ -454,6 +459,7 @@ exports.updateProfileData = (req, res) => {
           wallet,
           nationality,
           stripe_id,
+          notification,
         },
       });
     }
@@ -491,6 +497,7 @@ exports.updateImage = (req, res) => {
         wallet,
         nationality,
         stripe_id,
+        notification,
       } = user;
       return res.status(200).json({
         msg: "Picture Updated",
@@ -510,6 +517,7 @@ exports.updateImage = (req, res) => {
           wallet,
           nationality,
           stripe_id,
+          notification,
         },
       });
     }
@@ -526,6 +534,68 @@ exports.getAllUser = (req, res) => {
     }
     if (users) {
       return res.status(200).json({ users });
+    }
+  });
+};
+
+exports.updateNotification = (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    {
+      $set: {
+        notification: {
+          email: req.body.email,
+          sms: req.body.sms,
+          wp: req.body.wp,
+          pn: req.body.pn,
+        },
+      },
+    },
+    { new: true }
+  ).exec((error, user) => {
+    if (error) {
+      return res.status(400).json({ msg: "Something Went Wrong." });
+    }
+    if (user) {
+      const {
+        _id,
+        firstName,
+        lastName,
+        fullName,
+        email,
+        phone,
+        role,
+        gender,
+        img,
+        dob,
+        country,
+        dialCode,
+        wallet,
+        nationality,
+        stripe_id,
+        notification,
+      } = user;
+      return res.status(200).json({
+        msg: "Notification Prefenrence Updated",
+        user: {
+          _id,
+          firstName,
+          lastName,
+          fullName,
+          email,
+          phone,
+          role,
+          gender,
+          img,
+          dob,
+          country,
+          dialCode,
+          wallet,
+          nationality,
+          stripe_id,
+          notification,
+        },
+      });
     }
   });
 };

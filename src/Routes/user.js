@@ -14,6 +14,7 @@ const {
   resetPassword,
   verifyEmailForPassword,
   getAllUser,
+  updateNotification,
 } = require("../Controllers/user");
 const {
   requireSignIn,
@@ -51,6 +52,12 @@ router.post(
   userMiddleware,
   passwordVerification,
   updateProfileData
+);
+router.post(
+  "/user/auth/update/notification",
+  requireSignIn,
+  userMiddleware,
+  updateNotification
 );
 
 //Admin Routes
