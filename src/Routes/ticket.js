@@ -1,5 +1,9 @@
 const express = require("express");
-const { getTicketByUser, getAllTicket } = require("../Controllers/ticket");
+const {
+  getTicketByUser,
+  getAllTicket,
+  generateManualTicket,
+} = require("../Controllers/ticket");
 const {
   requireSignIn,
   userMiddleware,
@@ -13,6 +17,12 @@ router.get(
   requireSignIn,
   adminMiddleware,
   getAllTicket
+);
+router.post(
+  "/admin/ticket/create",
+  requireSignIn,
+  adminMiddleware,
+  generateManualTicket
 );
 
 module.exports = router;
