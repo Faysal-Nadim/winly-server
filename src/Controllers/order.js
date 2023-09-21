@@ -40,10 +40,11 @@ exports.placeOrder = (req, res) => {
           wallet,
         } = user;
         order.orderItems.forEach((e) => {
+          var count = e.qty * e.ticketQty;
           Campaign.findOne({ _id: e.campaign_id }).exec((err, campaign) => {
             Campaign.findOneAndUpdate(
               { _id: campaign._id },
-              { $set: { orderCount: campaign.orderCount + e.qty } }
+              { $set: { orderCount: campaign.orderCount + count } }
             ).exec();
           });
         });
