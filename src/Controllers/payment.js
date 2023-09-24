@@ -1,7 +1,5 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const fetch = require("node-fetch");
-const User = require("../Models/user");
-const Order = require("../Models/order");
 
 //Stripe
 exports.getStripeKey = (req, res) => {
@@ -18,6 +16,7 @@ exports.createPaymentIntent = async (req, res) => {
       },
       customer: req.body.customer,
       setup_future_usage: "off_session",
+      receipt_email: req.body.email,
     });
     res.send({
       clientSecret: paymentIntent.client_secret,
@@ -44,6 +43,7 @@ exports.createPaymentIntentForCustomer = async (req, res) => {
       return_url: "https://winly.net/order/success",
       off_session: true,
       confirm: true,
+      receipt_email: req.body.email,
     });
     res.send({ status: paymentIntent.status, id: paymentIntent.id });
   } catch (err) {
