@@ -10,6 +10,7 @@ const {
   createSetupIntent,
   getPaymentMethods,
   createPaymentIntentForCustomer,
+  detachPayment,
 } = require("../Controllers/payment");
 const { requireSignIn, userMiddleware } = require("../Middlewares");
 const router = express.Router();
@@ -43,6 +44,13 @@ router.post(
   requireSignIn,
   userMiddleware,
   createPaymentIntentForCustomer
+);
+
+router.post(
+  "/payment/stripe/delete-saved-card",
+  requireSignIn,
+  userMiddleware,
+  detachPayment
 );
 
 router.post("/payment/paypal/create-order", createPaypalOrder);

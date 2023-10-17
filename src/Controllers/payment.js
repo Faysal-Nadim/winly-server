@@ -81,6 +81,17 @@ exports.getPaymentMethods = async (req, res) => {
   return res.status(200).json({ methods: methods.data });
 };
 
+exports.detachPayment = async (req, res) => {
+  try {
+    const paymentMethod = await stripe.paymentMethods.detach(req.body.cardID);
+    return res.status(200).json({ msg: "Card Removed Successfully!" });
+  } catch (error) {
+    return res.status(400).send({
+      msg: "Failed! Try Again.",
+    });
+  }
+};
+
 //Paypal
 
 const CLIENT_ID = process.env.CLIENT_ID;
