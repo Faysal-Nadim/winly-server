@@ -2743,3 +2743,14 @@ exports.updateNotification = (req, res) => {
     }
   });
 };
+
+exports.deleteUser = (req, res) => {
+  User.findOneAndDelete({ email: req.body.email }).exec((err, user) => {
+    if (err) {
+      return res.status(400).json({ msg: "Something Went Wrong!" });
+    }
+    if (user) {
+      return res.status(201).json({ msg: "Account Deleted!" });
+    }
+  });
+};

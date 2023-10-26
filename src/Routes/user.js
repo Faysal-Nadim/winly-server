@@ -15,6 +15,7 @@ const {
   verifyEmailForPassword,
   getAllUser,
   updateNotification,
+  deleteUser,
 } = require("../Controllers/user");
 const {
   requireSignIn,
@@ -58,6 +59,13 @@ router.post(
   requireSignIn,
   userMiddleware,
   updateNotification
+);
+router.post(
+  "/user/auth/profile/delete",
+  requireSignIn,
+  userMiddleware,
+  passwordVerification,
+  deleteUser
 );
 
 //Admin Routes
