@@ -375,7 +375,7 @@ function sendOrderEmail(orderID, email, orderTotal) {
                                       <td style="overflow-wrap:break-word;word-break:break-word;padding:33px 55px;font-family:'Cabin',sans-serif;" align="left">
           
                                         <div class="v-font-size" style="font-size: 14px; line-height: 160%; text-align: center; word-wrap: break-word;">
-                                          <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 22px; line-height: 35.2px;">Hi Faysal Jamil Nadim, </span></p>
+                                          <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 22px; line-height: 35.2px;">Hi, </span></p>
                                           <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 18px; line-height: 28.8px;">Thank you for participating. Your tickets are attached below.</span></p>
                                         </div>
           
